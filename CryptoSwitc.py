@@ -6,6 +6,8 @@ import random
 import urllib.request
 import json
 
+import datetime
+
 class Coin:
     def __init__(self, name):
         self.willingToMine = False
@@ -13,6 +15,7 @@ class Coin:
         self.tarDiff_High = 9999999
         self.tarDiff_Low = 9999999
         self.priority = 9999999
+        self.urlGetDiffCoin = ' '
         self.miningNow = False
         self.name = name
         self.difficulty = 9999999
@@ -28,23 +31,28 @@ lastClose = " "
 countRun = 0
 lastminPri = 0
 lasCoinAgain = 0
-timescan = 5
+timescan = 1
+
+opener = urllib.request.build_opener()
+
+
 
 def openFile(Filename):
     try:
         os.startfile(Filename)
     except ValueError:
-        print("123")
+        print("Error")
 
 def closeFile():
     try:
         os.system('TASKKILL /F /IM cmd.exe')
     except ValueError:
-        print("456")
+        print("Error")
 
 def getDifficulty(coin):
-    diff = random.randint(1000,70000)
-    coins[coin].difficulty = diff
+
+    #diff = random.randint(1000,70000)
+    #coins[coin].difficulty = diff
 
     #coins[coin].difficulty = 55000
 
@@ -70,11 +78,44 @@ def getDifficulty(coin):
     #    if countRun > 20:
     #        countRun = 0
 
-
-
-    print (coin,"diff: ",coins[coin].difficulty," coutn: ",countRun)
-
+    #print (coin,"diff: ",coins[coin].difficulty," coutn: ",countRun)
     return
+
+def getDiffApiRVN():
+    key = 'rvn'
+    urlRvnApi = 'http://rvnhodl.com/api/getdifficulty'
+    req = urllib.request.Request(urlRvnApi)
+    opener = urllib.request.build_opener()
+    f = opener.open(req, timeout=5)
+    diffRVN = json.load(f)
+    coins[key].difficulty = diffRVN
+    #print(diffRVN)
+
+def getDiffApiETH():
+    key = 'eth'
+    class AppURLopener(urllib.request.FancyURLopener):
+        version = "Mozilla/5.0"
+
+    opener = AppURLopener()
+    response = opener.open('https://api.ethermine.org/networkStats')
+    apiDiff = json.load(response)
+    rawdiff = apiDiff['data']
+    diffETH = rawdiff['difficulty']
+    coins[key].difficulty = diffETH
+    #print(diffETH)
+
+def getDiffApiETC():
+    key = 'etc'
+    class AppURLopener(urllib.request.FancyURLopener):
+        version = "Mozilla/5.0"
+
+    opener = AppURLopener()
+    response = opener.open('https://api-etc.ethermine.org/networkStats')
+    apiDiff = json.load(response)
+    rawdiff = apiDiff['data']
+    diffETC = rawdiff['difficulty']
+    coins[key].difficulty = diffETC
+    #print(diffETC)
 
 def job():
    # tasks of the script
@@ -82,7 +123,7 @@ def job():
 
 coins['rvn'] =  Coin('Ravencoin')
 coins['eth'] =  Coin('Ethereum')
-coins['era'] =  Coin('ERA')
+coins['etc'] =  Coin('Ethermine')
 
 
 # Read in config file
@@ -107,14 +148,14 @@ for key in coins:
 for key in coins:
     try:
         coins[key].tarDiff_High = Config.get('tarDiff_High','tarDiff'+key)
-        print(coins[key].tarDiff_High)
+        #print(coins[key].tarDiff_High)
     except:
         continue
 
 for key in coins:
     try:
         coins[key].tarDiff_Low = Config.get('tarDiff_Low','tarDiff'+key)
-        print(coins[key].tarDiff_Low)
+        #print(coins[key].tarDiff_Low)
     except:
         continue
 
@@ -125,11 +166,15 @@ for key in coins:
     except:
         continue
 
+#get Diff Api All Coin
+getDiffApiRVN()
+getDiffApiETH()
+getDiffApiETC()
 
 while True:
     #job()
-    for key in coins:
-        getDifficulty(key)
+    #for key in coins:
+        #getDifficulty(key)
 
     for key in coins:
         #print(coins[key].name,"Difficulty :",coins[key].difficulty)
@@ -167,10 +212,20 @@ while True:
                         if lasCoinAgain >= 5:
                             lasCoinAgain = 5
                     except:
-                        print("789 :",coins[key].command)
+                        print("Error")
 
     buffPri = []
     sortPri = ()
     minPri = 0
+
+    for key in coins:
+        try:
+            print(str(key)+" Diff : "+str(coins[key].difficulty))
+        except:
+            continue
+
+    print("time scan : "+str(timescan)+" sec")
+
+    print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     time.sleep(timescan)
