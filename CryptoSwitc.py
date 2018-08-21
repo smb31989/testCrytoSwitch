@@ -31,7 +31,7 @@ lastClose = " "
 countRun = 0
 lastminPri = 0
 lasCoinAgain = 0
-timescan = 1
+#timescan = 1
 
 opener = urllib.request.build_opener()
 
@@ -166,6 +166,13 @@ for key in coins:
     except:
         continue
 
+#timescan
+timescan = 1
+try:
+    timescan = Config.get('looptime','timescan')
+except:
+    print("Error")
+
 #get Diff Api All Coin
 getDiffApiRVN()
 getDiffApiETH()
@@ -223,9 +230,9 @@ while True:
             print(str(key)+" Diff : "+str(coins[key].difficulty))
         except:
             continue
-
-    print("time scan : "+str(timescan)+" sec")
+    tmin = int(timescan)/60
+    print("time scan : "+str(timescan)+" sec = "+str(tmin)+" min ")
 
     print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
 
-    time.sleep(timescan)
+    time.sleep(int(timescan))
