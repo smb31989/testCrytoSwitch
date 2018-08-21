@@ -15,6 +15,7 @@
        ETCscript = ETC.bat
        
 -กำหนดช่วงของค่า diff High/Low
+
        [tarDiff_High]
        tarDiffRVN = 40000
        tarDiffETH = 3522206773042161
