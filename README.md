@@ -38,11 +38,11 @@
 
        [looptime]
        timescan = 1800
-####1800 sec = 30 min
+###1800 sec = 30 min
 
 -เปิด python
-####Start->Python 3.6 ->IDLE(Python 3.6 64 bit)
-####เมนู File->Open->CryptoSwitc.py
-####เมนู Run->Run Module
+###Start->Python 3.6 ->IDLE(Python 3.6 64 bit)
+###เมนู File->Open->CryptoSwitc.py
+###เมนู Run->Run Module
 
 
