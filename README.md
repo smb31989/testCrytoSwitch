@@ -32,3 +32,9 @@
        priRVN = 1
        priETH = 2
        priETC = 3
+       
+-กำหนด loop time
+
+       [looptime]
+       timescan = 1800
+###1800 sec = 30 min
