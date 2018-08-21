@@ -1,10 +1,12 @@
 # testCrytoSwitch
 -ดาวน์โหลด Python3: https://www.python.org/downloads
 -ใน File config.config: True = ชุด False = ไม่ขุด
+       [MineCoins]
        mineRVN = True
        mineETH = True
        mineETC = True
 -กำหนด File.bat ว่าอยู่ที่ไหน
+       [Scripts]
        RVNscript = C:\Users\Administrator\Documents\RVN.bat
        ETHscript = ETH.bat
        ETCscript = ETC.bat
@@ -21,6 +23,7 @@
        tarDiffETC = 100000000000000
 
 -กำหนด priority: 1 = สำคัญสุด
+       [priority]
        priRVN = 1
        priETH = 2
        priETC = 3
