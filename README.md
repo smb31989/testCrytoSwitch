@@ -1,9 +1,9 @@
 # testCrytoSwitch
-#-ดาวน์โหลด Python3: https://www.python.org/downloads/
+#-ดาวน์โหลด Python3: https://www.python.org/downloads
 #-ใน File config.config: True = ชุด False = ไม่ขุด
-#       mineRVN = True
-#       mineETH = True
-#       mineETC = True
+       mineRVN = True
+       mineETH = True
+       mineETC = True
 #-กำหนด File.bat ว่าอยู่ที่ไหน
 #       RVNscript = C:\Users\Administrator\Documents\RVN.bat
 #       ETHscript = ETH.bat
