@@ -23,7 +23,7 @@
        tarDiffETC = 100000000000000
 
 -กำหนด priority: 1 = สำคัญสุด
-       [priority]
+       [prority]
        priRVN = 1
        priETH = 2
        priETC = 3
