@@ -175,10 +175,11 @@ except:
 
 #get Diff Api All Coin
 getDiffApiRVN()
-getDiffApiETH()
-getDiffApiETC()
+#getDiffApiETH()
+#getDiffApiETC()
 
 while True:
+    getDiffApiRVN()
     #job()
     #for key in coins:
         #getDifficulty(key)
